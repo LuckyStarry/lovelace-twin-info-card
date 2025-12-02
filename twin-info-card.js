@@ -350,11 +350,12 @@ class TwinInfoCard extends HTMLElement {
     const style = document.createElement("style");
     style.textContent = `
       .twin-info-card {
-        padding: 8px 12px;
+        padding: 10px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         cursor: ${this._config.tap_action ? "pointer" : "default"};
+        box-sizing: border-box;
       }
 
       .icon-container {
@@ -364,6 +365,9 @@ class TwinInfoCard extends HTMLElement {
         width: 48px;
         height: 48px;
         flex-shrink: 0;
+        position: relative;
+        padding: 6px;
+        margin: -6px;
       }
 
       .icon-container ha-icon {
