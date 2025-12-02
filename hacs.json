@@ -1,0 +1,7 @@
+{
+  "name": "Twin Info Card",
+  "render_readme": true,
+  "filename": "twin-info-card.js",
+  "domains": ["lovelace"],
+  "homeassistant": "2023.1.0"
+}

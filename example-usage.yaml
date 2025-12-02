@@ -1,0 +1,72 @@
+# 基本用法 - 显示单个实体
+type: custom:twin-info-card
+entity1: sensor.bedroom_temperature
+name: 主卧
+
+# 显示两个实体
+type: custom:twin-info-card
+entity1: sensor.bedroom_temperature
+entity2: sensor.bedroom_humidity
+name: 主卧
+icon: mdi:bed-king
+icon_color: "#ff4081"
+
+# 自定义标签
+type: custom:twin-info-card
+entity1: sensor.bedroom_temperature
+entity2: sensor.bedroom_humidity
+name: 主卧
+label1: 温度
+label2: 湿度
+icon: mdi:bed-king
+icon_color: "#ff4081"
+
+# 带值映射
+type: custom:twin-info-card
+entity1: sensor.door_sensor_state
+entity2: sensor.window_sensor_state
+name: 门窗状态
+label1: 门
+label2: 窗
+value_mapping1:
+  "on": "开启"
+  "off": "关闭"
+value_mapping2:
+  "on": "开启"
+  "off": "关闭"
+icon: mdi:home
+icon_color: "#4caf50"
+
+# 带点击动作
+type: custom:twin-info-card
+entity1: sensor.bedroom_temperature
+entity2: sensor.bedroom_humidity
+name: 主卧
+icon: mdi:bed-king
+icon_color: "#ff4081"
+tap_action:
+  action: more-info
+  entity_id: sensor.bedroom_temperature
+
+# 在网格布局中使用
+type: grid
+cards:
+  - type: custom:twin-info-card
+    entity1: sensor.bedroom_temperature
+    entity2: sensor.bedroom_humidity
+    name: 主卧
+    icon: mdi:bed-king
+    icon_color: "#ff4081"
+    grid_options:
+      columns: 6
+      rows: 1
+  - type: custom:twin-info-card
+    entity1: sensor.living_room_temperature
+    entity2: sensor.living_room_humidity
+    name: 客厅
+    icon: mdi:sofa
+    icon_color: "#2196f3"
+    grid_options:
+      columns: 6
+      rows: 1
+

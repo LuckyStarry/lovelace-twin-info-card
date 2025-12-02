@@ -1,0 +1,10 @@
+{
+  "domain": "twin_info_card",
+  "name": "Twin Info Card",
+  "documentation": "https://github.com/LuckyStarry/lovelace-twin-info-card",
+  "issue_tracker": "https://github.com/LuckyStarry/lovelace-twin-info-card/issues",
+  "codeowners": ["@LuckyStarry"],
+  "version": "1.0.0",
+  "dependencies": [],
+  "requirements": []
+}
