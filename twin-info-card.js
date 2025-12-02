@@ -47,23 +47,9 @@ class TwinInfoCardEditor extends HTMLElement {
   }
 
   _getColorSelector() {
-    // 检查是否支持 mush_color 选择器（Mushroom 主题）
-    // 如果 Mushroom 已安装，使用 mush_color，否则使用 color_rgb
-    try {
-      // 检查 Mushroom 颜色选择器是否可用
-      if (
-        this._hass &&
-        this._hass.connection &&
-        this._hass.connection.haVersion
-      ) {
-        // 尝试使用 mush_color，如果失败会回退
-        return { mush_color: {} };
-      }
-    } catch (e) {
-      // 忽略错误
-    }
-    // 回退到标准颜色选择器
-    return { color_rgb: {} };
+    // 直接使用 mush_color，如果 Mushroom 未安装，ha-form 会自动处理
+    // Mushroom 的颜色选择器提供更好的用户体验（颜色盘）
+    return { mush_color: {} };
   }
 
   async _render() {
@@ -365,6 +351,54 @@ class TwinInfoCard extends HTMLElement {
     this.dispatchEvent(event);
   }
 
+  _convertColor(color) {
+    if (!color) return undefined;
+
+    // 如果已经是十六进制颜色或 rgb/rgba，直接返回
+    if (color.startsWith("#") || color.startsWith("rgb")) {
+      return color;
+    }
+
+    // Mushroom 颜色名称到 RGB 值的映射（Material Design 标准颜色）
+    const colorMap = {
+      pink: "233, 30, 99",
+      red: "244, 67, 54",
+      purple: "156, 39, 176",
+      "deep-purple": "103, 58, 183",
+      indigo: "63, 81, 181",
+      blue: "33, 150, 243",
+      "light-blue": "3, 169, 244",
+      cyan: "0, 188, 212",
+      teal: "0, 150, 136",
+      green: "76, 175, 80",
+      "light-green": "139, 195, 74",
+      lime: "205, 220, 57",
+      yellow: "255, 235, 59",
+      amber: "255, 193, 7",
+      orange: "255, 152, 0",
+      "deep-orange": "255, 87, 34",
+      brown: "121, 85, 72",
+      "blue-grey": "96, 125, 139",
+      grey: "158, 158, 158",
+      primary: "var(--primary-color)",
+      accent: "var(--accent-color)",
+    };
+
+    // 转换为小写并查找映射
+    const colorKey = color.toLowerCase().replace(/\s+/g, "-");
+    if (colorMap[colorKey]) {
+      const rgbValue = colorMap[colorKey];
+      // 如果已经是 CSS 变量，直接返回；否则转换为 rgb() 格式
+      if (rgbValue.startsWith("var(")) {
+        return rgbValue;
+      }
+      return `rgb(${rgbValue})`;
+    }
+
+    // 如果找不到映射，尝试使用 CSS 变量，如果变量不存在则使用默认值
+    return `var(--rgb-${colorKey}, var(--primary-color, #03a9f4))`;
+  }
+
   _render() {
     if (!this.shadowRoot) return;
 
@@ -499,7 +533,8 @@ class TwinInfoCard extends HTMLElement {
 
     // 设置 CSS 变量用于图标颜色
     if (this._config.icon_color) {
-      haCard.style.setProperty("--tile-color", this._config.icon_color);
+      const convertedColor = this._convertColor(this._config.icon_color);
+      haCard.style.setProperty("--tile-color", convertedColor);
     }
 
     // 创建背景层（用于点击区域）
