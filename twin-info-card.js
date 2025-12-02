@@ -349,13 +349,36 @@ class TwinInfoCard extends HTMLElement {
     // 创建样式
     const style = document.createElement("style");
     style.textContent = `
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: var(--ha-card-border-radius, 12px);
+        margin: calc(-1 * var(--ha-card-border-width, 1px));
+        overflow: hidden;
+        cursor: ${this._config.tap_action ? "pointer" : "default"};
+      }
+
+      .container {
+        margin: calc(-1 * var(--ha-card-border-width, 1px));
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
       .twin-info-card {
+        position: relative;
         padding: 10px;
         display: flex;
+        flex-direction: row;
         align-items: center;
         gap: 10px;
-        cursor: ${this._config.tap_action ? "pointer" : "default"};
+        flex: 1;
+        min-width: 0;
         box-sizing: border-box;
+        pointer-events: none;
       }
 
       .icon-container {
@@ -368,6 +391,7 @@ class TwinInfoCard extends HTMLElement {
         position: relative;
         padding: 6px;
         margin: -6px;
+        box-sizing: border-box;
       }
 
       .icon-container ha-icon {
@@ -381,7 +405,8 @@ class TwinInfoCard extends HTMLElement {
         min-width: 0;
         display: flex;
         flex-direction: column;
-        gap: 1px;
+        position: relative;
+        box-sizing: border-box;
       }
 
       .primary {
@@ -403,11 +428,12 @@ class TwinInfoCard extends HTMLElement {
           --ha-text-primary-color,
           var(--primary-text-color, rgba(0, 0, 0, 0.87))
         );
-        line-height: 1.3;
+        line-height: 1.2;
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
         align-items: center;
+        margin-top: 2px;
       }
 
       .info-item {
@@ -444,6 +470,16 @@ class TwinInfoCard extends HTMLElement {
 
     // 创建卡片容器
     const haCard = document.createElement("ha-card");
+
+    // 创建背景层（用于点击区域）
+    const background = document.createElement("div");
+    background.className = "background";
+
+    // 创建容器层
+    const container = document.createElement("div");
+    container.className = "container";
+
+    // 创建内容层
     const cardContent = document.createElement("div");
     cardContent.className = "twin-info-card";
 
@@ -530,11 +566,13 @@ class TwinInfoCard extends HTMLElement {
     // 组装卡片
     cardContent.appendChild(iconContainer);
     cardContent.appendChild(content);
-    haCard.appendChild(cardContent);
+    container.appendChild(cardContent);
+    haCard.appendChild(background);
+    haCard.appendChild(container);
 
     // 添加点击事件
     if (this._config.tap_action) {
-      cardContent.addEventListener("click", () => {
+      background.addEventListener("click", () => {
         this._handleClick();
       });
     }
