@@ -374,7 +374,6 @@ class TwinInfoCard extends HTMLElement {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 10px;
         flex: 1;
         min-width: 0;
         box-sizing: border-box;
