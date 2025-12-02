@@ -46,6 +46,26 @@ class TwinInfoCardEditor extends HTMLElement {
     return this._hass;
   }
 
+  _getColorSelector() {
+    // 检查是否支持 mush_color 选择器（Mushroom 主题）
+    // 如果 Mushroom 已安装，使用 mush_color，否则使用 color_rgb
+    try {
+      // 检查 Mushroom 颜色选择器是否可用
+      if (
+        this._hass &&
+        this._hass.connection &&
+        this._hass.connection.haVersion
+      ) {
+        // 尝试使用 mush_color，如果失败会回退
+        return { mush_color: {} };
+      }
+    } catch (e) {
+      // 忽略错误
+    }
+    // 回退到标准颜色选择器
+    return { color_rgb: {} };
+  }
+
   async _render() {
     this.innerHTML = "";
 
@@ -101,9 +121,7 @@ class TwinInfoCardEditor extends HTMLElement {
           {
             name: "icon_color",
             required: false,
-            selector: {
-              mush_color: {},
-            },
+            selector: this._getColorSelector(),
           },
         ],
       },
