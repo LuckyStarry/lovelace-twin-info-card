@@ -93,12 +93,18 @@ class TwinInfoCardEditor extends HTMLElement {
         selector: {
           icon: {},
         },
+        context: {
+          layout: "grid",
+        },
       },
       {
         name: "icon_color",
         required: false,
         selector: {
-          color_rgb: {},
+          color_picker: {},
+        },
+        context: {
+          layout: "grid",
         },
       },
     ];
