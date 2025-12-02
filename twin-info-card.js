@@ -386,6 +386,12 @@ class TwinInfoCard extends HTMLElement {
         padding: 6px;
         margin: -6px;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        box-sizing: border-box;
       }
 
       .icon-container ha-icon {
