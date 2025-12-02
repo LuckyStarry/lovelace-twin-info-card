@@ -350,7 +350,7 @@ class TwinInfoCard extends HTMLElement {
     const style = document.createElement("style");
     style.textContent = `
       .twin-info-card {
-        padding: 12px;
+        padding: 8px 12px;
         display: flex;
         align-items: center;
         gap: 12px;
@@ -361,6 +361,7 @@ class TwinInfoCard extends HTMLElement {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 40px;
         flex-shrink: 0;
       }
 
@@ -375,7 +376,7 @@ class TwinInfoCard extends HTMLElement {
         min-width: 0;
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 1px;
       }
 
       .primary {
@@ -397,7 +398,7 @@ class TwinInfoCard extends HTMLElement {
           --ha-text-primary-color,
           var(--primary-text-color, rgba(0, 0, 0, 0.87))
         );
-        line-height: 1.4;
+        line-height: 1.3;
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
