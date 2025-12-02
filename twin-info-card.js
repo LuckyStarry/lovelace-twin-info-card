@@ -350,10 +350,10 @@ class TwinInfoCard extends HTMLElement {
     const style = document.createElement("style");
     style.textContent = `
       .twin-info-card {
-        padding: 16px;
+        padding: 12px;
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
         cursor: ${this._config.tap_action ? "pointer" : "default"};
       }
 
@@ -361,15 +361,15 @@ class TwinInfoCard extends HTMLElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 48px;
-        height: 48px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         flex-shrink: 0;
       }
 
       .icon-container ha-icon {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         color: var(--ha-icon-color, var(--primary-color, #03a9f4));
       }
 
@@ -378,11 +378,11 @@ class TwinInfoCard extends HTMLElement {
         min-width: 0;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
       }
 
       .primary {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         color: var(
           --ha-text-primary-color,
@@ -395,7 +395,7 @@ class TwinInfoCard extends HTMLElement {
       }
 
       .secondary {
-        font-size: 14px;
+        font-size: 12px;
         color: var(
           --ha-text-secondary-color,
           var(--secondary-text-color, rgba(0, 0, 0, 0.6))
@@ -403,7 +403,7 @@ class TwinInfoCard extends HTMLElement {
         line-height: 1.4;
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
         align-items: center;
       }
 
