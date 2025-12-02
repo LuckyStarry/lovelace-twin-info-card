@@ -374,6 +374,7 @@ class TwinInfoCard extends HTMLElement {
         display: flex;
         flex-direction: row;
         align-items: center;
+        gap: 10px;
         flex: 1;
         min-width: 0;
         box-sizing: border-box;
@@ -381,16 +382,10 @@ class TwinInfoCard extends HTMLElement {
       }
 
       .icon-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        flex-shrink: 0;
         position: relative;
         padding: 6px;
         margin: -6px;
-        box-sizing: border-box;
+        flex-shrink: 0;
       }
 
       .icon-container ha-icon {
@@ -400,12 +395,13 @@ class TwinInfoCard extends HTMLElement {
       }
 
       .content {
-        flex: 1;
+        position: relative;
         min-width: 0;
+        flex: 1;
         display: flex;
         flex-direction: column;
-        position: relative;
         box-sizing: border-box;
+        transition: background-color 180ms ease-in-out;
       }
 
       .primary {
