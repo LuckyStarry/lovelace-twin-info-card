@@ -403,7 +403,8 @@ class TwinInfoCard extends HTMLElement {
       .icon-container ha-icon {
         width: 24px;
         height: 24px;
-        color: var(--ha-icon-color, var(--primary-color, #03a9f4));
+        --tile-icon-color: var(--tile-color, var(--ha-icon-color, var(--primary-color, #03a9f4)));
+        color: var(--tile-icon-color);
       }
 
       .content {
@@ -478,6 +479,11 @@ class TwinInfoCard extends HTMLElement {
     // 创建卡片容器
     const haCard = document.createElement("ha-card");
 
+    // 设置 CSS 变量用于图标颜色
+    if (this._config.icon_color) {
+      haCard.style.setProperty("--tile-color", this._config.icon_color);
+    }
+
     // 创建背景层（用于点击区域）
     const background = document.createElement("div");
     background.className = "background";
@@ -506,9 +512,6 @@ class TwinInfoCard extends HTMLElement {
 
     const icon = document.createElement("ha-icon");
     icon.setAttribute("icon", this._config.icon || "mdi:information");
-    if (this._config.icon_color) {
-      icon.style.color = this._config.icon_color;
-    }
     iconContainer.appendChild(icon);
 
     // 创建内容区域
