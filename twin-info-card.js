@@ -49,25 +49,6 @@ class TwinInfoCardEditor extends HTMLElement {
   async _render() {
     this.innerHTML = "";
 
-    // 添加样式使图标和颜色在同一行
-    const style = document.createElement("style");
-    style.textContent = `
-      ha-form ha-icon-picker[data-name="icon"],
-      ha-form ha-icon-picker[data-name="icon"] ~ * {
-        display: inline-block !important;
-      }
-      ha-form ha-icon-picker[data-name="icon"] {
-        width: calc(50% - 8px) !important;
-        margin-right: 16px !important;
-      }
-      ha-form ha-color-picker[data-name="icon_color"],
-      ha-form ha-color-rgb-picker[data-name="icon_color"] {
-        width: calc(50% - 8px) !important;
-        display: inline-block !important;
-      }
-    `;
-    this.appendChild(style);
-
     const entityForm = document.createElement("ha-form");
 
     const schema = [
@@ -107,18 +88,24 @@ class TwinInfoCardEditor extends HTMLElement {
         },
       },
       {
-        name: "icon",
-        required: false,
-        selector: {
-          icon: {},
-        },
-      },
-      {
-        name: "icon_color",
-        required: false,
-        selector: {
-          color_rgb: {},
-        },
+        type: "grid",
+        name: "",
+        schema: [
+          {
+            name: "icon",
+            required: false,
+            selector: {
+              icon: {},
+            },
+          },
+          {
+            name: "icon_color",
+            required: false,
+            selector: {
+              mush_color: {},
+            },
+          },
+        ],
       },
     ];
 
