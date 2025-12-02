@@ -361,9 +361,6 @@ class TwinInfoCard extends HTMLElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
         flex-shrink: 0;
       }
 
@@ -397,8 +394,8 @@ class TwinInfoCard extends HTMLElement {
       .secondary {
         font-size: 12px;
         color: var(
-          --ha-text-secondary-color,
-          var(--secondary-text-color, rgba(0, 0, 0, 0.6))
+          --ha-text-primary-color,
+          var(--primary-text-color, rgba(0, 0, 0, 0.87))
         );
         line-height: 1.4;
         display: flex;
@@ -457,32 +454,6 @@ class TwinInfoCard extends HTMLElement {
     // 创建图标
     const iconContainer = document.createElement("div");
     iconContainer.className = "icon-container";
-
-    // 处理图标背景颜色（带透明度）
-    const getBackgroundColor = (color) => {
-      if (!color) {
-        return "rgba(3, 169, 244, 0.12)"; // 默认颜色的 12% 透明度
-      }
-      // 如果是十六进制颜色，转换为 rgba
-      if (color.startsWith("#")) {
-        const hex = color.slice(1);
-        const r = parseInt(hex.slice(0, 2), 16);
-        const g = parseInt(hex.slice(2, 4), 16);
-        const b = parseInt(hex.slice(4, 6), 16);
-        return `rgba(${r}, ${g}, ${b}, 0.12)`;
-      }
-      // 如果已经是 rgba/rgb，提取颜色并添加透明度
-      const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-      if (rgbMatch) {
-        return `rgba(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]}, 0.12)`;
-      }
-      // 其他情况，直接使用颜色（可能不理想，但至少不会报错）
-      return color;
-    };
-
-    iconContainer.style.backgroundColor = getBackgroundColor(
-      this._config.icon_color
-    );
 
     const icon = document.createElement("ha-icon");
     icon.setAttribute("icon", this._config.icon || "mdi:information");
